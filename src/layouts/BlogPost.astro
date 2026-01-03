@@ -1,0 +1,32 @@
+---
+// src/layouts/BlogPost.astro
+const { frontmatter } = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{frontmatter.title} | yuh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#faf9f6] text-neutral-800 font-serif antialiased">
+    <main class="container mx-auto px-6 py-16 max-w-[680px]">
+      
+      <header class="mb-12 text-sm text-neutral-400 font-sans">
+        <a href="/" class="hover:underline">← Back to Home</a>
+      </header>
+
+      <article class="prose prose-neutral prose-lg prose-headings:font-normal prose-a:text-blue-700 hover:prose-a:underline">
+        <h1 class="mb-2">{frontmatter.title}</h1>
+        <div class="text-sm text-neutral-400 font-sans mb-10">{frontmatter.date}</div>
+        
+        <slot />
+        
+      </article>
+
+    </main>
+  </body>
+</html>
