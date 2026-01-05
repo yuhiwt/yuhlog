@@ -1,5 +1,9 @@
 ---
 // src/pages/index.astro
+
+// ★追加: 共通ヘッドコンポーネントを読み込み
+import BaseHead from '../components/BaseHead.astro';
+
 // 1. postsフォルダ内の全mdファイルを取得
 const posts = await Astro.glob('./posts/*.md');
 
@@ -11,13 +15,12 @@ const sortedPosts = posts.sort((a, b) =>
 
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>yuhlog</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <BaseHead 
+      title="Home" 
+      description="物理空間と仮想空間の交差点についてなんか書いてる備忘録" 
+    />
   </head>
+  
   <body class="bg-[#faf9f6] text-neutral-800 font-serif antialiased selection:bg-yellow-200">
     
     <main class="container mx-auto px-6 py-16 max-w-[680px]">
@@ -33,7 +36,7 @@ const sortedPosts = posts.sort((a, b) =>
         <section class="mb-16">
           <p>
             東京で活動しています。<br>
-            物理空間と仮想空間の交差点についてなんか書いています。
+            物理空間と仮想空間の交差点について備忘としてなんか書いています。
           </p>
           <p class="text-sm">
             <a href="https://x.com/" target="_blank">X</a> / <a href="https://www.instagram.com/yuhiwt" target="_blank">Instagram</a>
