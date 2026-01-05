@@ -7,7 +7,15 @@ interface Props {
 }
 
 const { title, description = "物理空間と仮想空間の交差点について備忘としてなんか書いています。", image = "/og-image.png" } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+
+// ■ サイト名定義
+const siteName = "yuhlog";
+
+// ■ タイトル生成ロジック
+// 記事ページ: "記事タイトル | yuhlog"
+// トップページ: "yuhlog" (重複させない)
+const pageTitle = title === siteName ? siteName : `${title} | ${siteName}`;
 ---
 
 <meta charset="utf-8" />
@@ -17,19 +25,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <link rel="canonical" href={canonicalURL} />
 
-<title>{title} | yuhlog</title>
-<meta name="title" content={`${title} | yuhlog`} />
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
 <meta name="description" content={description} />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
+<meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
-
-<meta property="twitter:card" content="summary_large_image" />
+<meta property="og:site_name" content={siteName} /> <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
+<meta property="twitter:title" content={pageTitle} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 

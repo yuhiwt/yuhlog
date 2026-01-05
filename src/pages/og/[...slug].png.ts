@@ -33,37 +33,58 @@ export async function GET({ props: { title } }) {
           display: 'flex',
           height: '100%',
           width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
           backgroundColor: '#faf9f6',
-          padding: '80px',
+          // padding: '80px', // 全体のパディングは削除し、個別に配置します
+          position: 'relative', // 相対配置を有効化
         },
         children: [
+          // 1. 記事タイトル（中央配置）
           {
             type: 'div',
             props: {
               style: {
-                fontSize: '64px',
-                fontWeight: 700,
-                fontFamily: '"Noto Serif JP"',
-                color: '#262626',
-                textAlign: 'center',
-                lineHeight: 1.4,
-                wordBreak: 'break-word',
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '80px', // テキストの余白
               },
-              children: title,
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '64px',
+                      fontWeight: 700,
+                      fontFamily: '"Noto Serif JP"',
+                      color: '#262626',
+                      textAlign: 'center',
+                      lineHeight: 1.4,
+                      wordBreak: 'break-word',
+                    },
+                    children: title,
+                  },
+                },
+              ],
             },
           },
+          // 2. サイトロゴ（右下配置）
           {
             type: 'div',
             props: {
               style: {
-                fontSize: '28px',
-                marginTop: '50px',
+                position: 'absolute',
+                bottom: '50px', // 下からの距離
+                right: '60px',  // 右からの距離
+                fontSize: '24px',
                 fontFamily: '"Noto Serif JP"',
-                color: '#a3a3a3',
-                letterSpacing: '0.1em',
+                fontWeight: 700, // サイトヘッダーに合わせて太くする
+                color: '#a3a3a3', // 少し薄くして上品に
+                letterSpacing: '0.05em',
               },
               children: 'yuhlog',
             },
